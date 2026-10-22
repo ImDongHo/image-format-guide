@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>이미지 포맷 길잡이 | 임동호</title>
+<meta name="description" content="보고서·블로그에 올릴 이미지를 어떤 포맷으로 저장하면 얼마나 가벼워지는지, 논문 실측 결과로 알려 주는 앱.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f3f6fb; --text:#1d232b; --sub:#56606d; --faint:#626b78;
+  --line:#e2e7ee; --track:#dbe2ec; --accent:#1f5fd6; --accent-strong:#16469f; --accent-soft:#eaf1fd;
+  --accent-mid:#a7c1f1; --warn:#9a5a00; --warn-soft:#fff4e0; --on-accent:#ffffff;
+  --measure:720px; --page:1040px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111418; --surface:#162030; --text:#e7ebf0; --sub:#a3acb8; --faint:#8f98a4;
+    --line:#262d36; --track:#26303e; --accent:#6f9ef0; --accent-strong:#a2c0f6; --accent-soft:#18243a;
+    --accent-mid:#2f4c7d; --warn:#f0b35a; --warn-soft:#2e2414; --on-accent:#0d1420;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"IBM Plex Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:calc(var(--page) + 48px);margin:0 auto;padding:0 24px}
+[hidden]{display:none!important}
+
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:16px;height:56px}
+header.top .brand{margin-right:auto;font-weight:700;color:var(--text);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+header.top .brand::before{content:"";width:8px;height:8px;border-radius:50%;border:2px solid var(--accent)}
+header.top a.back{font-size:14px;color:var(--sub);text-decoration:none}
+header.top a.back:hover{color:var(--accent)}
+
+/* 첫 화면: 논문 제목과 한 문장 */
+.intro{padding:56px 0 40px;max-width:820px}
+.intro .from{font-size:14px;color:var(--sub);margin:0 0 10px}
+.intro .from a{font-weight:600}
+.intro h1{font-size:clamp(30px,4.6vw,44px);line-height:1.25;letter-spacing:-.025em;margin:0 0 20px}
+.intro .help{font-size:clamp(18px,2.2vw,21px);line-height:1.65;margin:0;font-weight:500}
+.intro .help strong{color:var(--accent-strong)}
+
+/* 도구: 왼쪽 단계, 오른쪽 결과 */
+.tool{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:40px;align-items:start;padding-bottom:64px}
+.steps{display:grid;gap:36px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend,.step-title{display:flex;align-items:baseline;gap:10px;font-size:18px;font-weight:700;margin:0 0 6px;padding:0}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:14px;flex:none;transform:translateY(-1px)}
+.step-help{color:var(--sub);font-size:14.5px;margin:0 0 14px}
+
+.choices{display:grid;gap:10px}
+.choices.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.choices.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.choice label{display:block;height:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;background:var(--bg)}
+.choice label b{display:block;font-size:16px}
+.choice label span{display:block;font-size:13.5px;color:var(--sub);line-height:1.5;margin-top:2px}
+.choice input:checked + label{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.choice input:focus-visible + label{outline:2px solid var(--accent);outline-offset:3px}
+
+.upload{margin-top:14px;border:1.5px dashed var(--track);border-radius:12px;padding:16px;background:var(--surface)}
+.upload.drag{border-color:var(--accent);background:var(--accent-soft)}
+.upload p{margin:0;font-size:14px;color:var(--sub)}
+.upload .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 16px;border-radius:10px;
+  border:1.5px solid var(--accent);background:var(--accent);color:var(--on-accent);font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+.btn.ghost{background:var(--bg);color:var(--accent)}
+.btn:hover{background:var(--accent-strong);border-color:var(--accent-strong);color:var(--on-accent)}
+.analysis{margin-top:12px;display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:start}
+.analysis canvas{width:72px;height:45px;border-radius:6px;border:1px solid var(--line);background:#fff}
+.analysis .verdict{font-size:14.5px;line-height:1.6}
+.analysis .verdict b{color:var(--accent-strong)}
+.analysis .metric{color:var(--faint);font-size:13px}
+
+.size-input{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.size-input input,.size-input select{font:inherit;font-size:16px;min-height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}
+.size-input input{width:9.5em;min-width:0}
+.size-input input:focus,.size-input select:focus{border-color:var(--accent);outline:none}
+.size-input input:focus-visible,.size-input select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.msg{font-size:14px;margin:10px 0 0;padding:10px 12px;border-radius:8px}
+.msg.err{background:var(--warn-soft);color:var(--warn)}
+
+/* 결과 */
+.result{position:sticky;top:20px;background:var(--surface);border-radius:16px;padding:28px}
+.result .label{font-size:14px;color:var(--sub);margin:0}
+.result .pick{font-size:44px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:4px 0 6px;color:var(--accent-strong)}
+.result .headline{font-size:17px;margin:0 0 4px}
+.result .range{font-size:14px;color:var(--sub);margin:0 0 20px}
+.bars{display:grid;gap:12px;margin:0 0 20px}
+.bar{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.bar b{font-weight:600}
+.bar .track{height:12px;border-radius:6px;background:var(--track);position:relative;overflow:hidden}
+.bar .fill{position:absolute;inset:0 auto 0 0;border-radius:6px;background:var(--accent-mid)}
+.bar.best .fill{background:var(--accent)}
+.bar .v{font-variant-numeric:tabular-nums;color:var(--sub);min-width:4.5em;text-align:right}
+.est{border-top:1px solid var(--line);padding-top:16px;margin-top:4px;font-size:15px}
+.est p{margin:0 0 4px}
+.est .v{font-weight:700;font-variant-numeric:tabular-nums}
+.near{border-top:1px solid var(--line);padding-top:16px;margin-top:16px;font-size:14.5px}
+.notes{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.notes li{font-size:13.5px;line-height:1.6;color:var(--sub);padding-left:14px;position:relative}
+.notes li::before{content:"";position:absolute;left:0;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--accent-mid)}
+.notes li.warn{color:var(--warn)}
+.notes li.warn::before{background:var(--warn)}
+
+/* 아래: 근거와 한계 */
+.basis{border-top:1px solid var(--line);padding:48px 0 64px}
+.basis h2{font-size:22px;margin:0 0 12px}
+.basis .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}
+.basis p,.basis li{font-size:14.5px;color:var(--sub)}
+.basis ul{padding-left:18px;margin:0}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--sub);font-weight:600}
+footer{border-top:1px solid var(--line);padding:28px 0 48px;font-size:14px;color:var(--sub)}
+
+@media (max-width:880px){
+  .tool{grid-template-columns:minmax(0,1fr)}
+  .result{position:static}
+  .basis .cols{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+  .wrap{padding:0 16px}
+  .intro{padding:36px 0 28px}
+  .choices.two,.choices.three{grid-template-columns:minmax(0,1fr)}
+  .result{padding:22px 18px}
+  .result .pick{font-size:38px}
+  .size-input input{flex:1 1 8em;width:auto}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top">이미지 포맷 길잡이</a>
+  <a class="back" href="https://imdongho.github.io/about-me/">만든 사람: 임동호</a>
+</div></header>
+
+<main class="wrap" id="top">
+  <section class="intro">
+    <p class="from">논문 「<a href="https://imdongho.github.io/about-me/files/paper.pdf">같은 화질에서 WebP·AVIF는 JPEG보다 얼마나 작은가</a>」(임동호, 2026)의 결과로 만든 앱</p>
+    <h1>이미지를 어떤 포맷으로 저장할까요?</h1>
+    <p class="help">이 앱은 <strong>보고서·블로그에 화면 캡처나 사진을 올리는 사람</strong>이 저장 포맷을 고를 때, 논문에서 실제로 잰 '같은 화질 기준 JPEG 대비 절감률'로 <strong>어떤 포맷이 얼마나 가벼워지는지</strong> 알려 줘서 돕습니다.</p>
+  </section>
+
+  <div class="tool">
+    <div class="steps">
+      <fieldset>
+        <legend><span class="num" aria-hidden="true">1</span>이미지 종류를 고르세요</legend>
+        <p class="step-help">잘 모르겠으면 아래에 이미지를 올리거나 예시로 해 보세요. 논문과 같은 기준으로 추정합니다.</p>
+        <div class="choices two">
+          <div class="choice"><input type="radio" name="kind" id="k-screen" value="screen" checked><label for="k-screen"><b>화면 캡처</b><span>터미널·콘솔·관리 화면처럼 글자와 단색 배경이 많은 이미지</span></label></div>
+          <div class="choice"><input type="radio" name="kind" id="k-photo" value="photo"><label for="k-photo"><b>사진</b><span>카메라로 찍은 풍경·사람·사물처럼 색이 고르게 섞인 이미지</span></label></div>
+        </div>
+        <div class="upload" id="drop">
+          <div class="row">
+            <label class="btn ghost" for="file">내 이미지로 추정</label>
+            <input type="file" id="file" accept="image/*" hidden>
+            <button type="button" class="btn ghost" id="ex-screen">예시: 터미널 화면</button>
+            <button type="button" class="btn ghost" id="ex-photo">예시: 사진 같은 이미지</button>
+          </div>
+          <p>이미지는 이 브라우저 안에서만 분석하고 어디에도 올리지 않습니다. 끌어다 놓아도 됩니다.</p>
+          <div class="analysis" id="analysis" hidden aria-live="polite">
+            <canvas id="thumb" width="144" height="90" aria-hidden="true"></canvas>
+            <div><div class="verdict" id="verdict"></div><div class="metric" id="metric"></div></div>
+          </div>
+          <p class="msg err" id="file-err" role="alert" hidden></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="num" aria-hidden="true">2</span>원하는 화질을 고르세요</legend>
+        <p class="step-help">논문은 원본과 얼마나 닮았는지를 SSIM(1에 가까울수록 원본과 같음)으로 맞췄습니다.</p>
+        <div class="choices three">
+          <div class="choice"><input type="radio" name="q" id="q90" value="0.90"><label for="q90"><b>가볍게</b><span>SSIM 0.90 · 미리보기, 썸네일</span></label></div>
+          <div class="choice"><input type="radio" name="q" id="q95" value="0.95" checked><label for="q95"><b>보통</b><span>SSIM 0.95 · 블로그, 보고서 본문</span></label></div>
+          <div class="choice"><input type="radio" name="q" id="q98" value="0.98"><label for="q98"><b>선명하게</b><span>SSIM 0.98 · 작은 글자까지 읽혀야 할 때</span></label></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="num" aria-hidden="true">3</span>지금 JPEG 용량을 넣어 보세요 <span style="font-weight:400;font-size:14px;color:var(--sub)">(선택)</span></legend>
+        <p class="step-help">JPEG로 저장했을 때의 용량을 넣으면, 같은 화질의 WebP·AVIF가 얼마쯤 될지 계산합니다. 이미지 여러 장의 합계를 넣어도 됩니다.</p>
+        <div class="size-input">
+          <label for="size" class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">JPEG 용량</label>
+          <input id="size" size="8" inputmode="decimal" autocomplete="off" placeholder="예: 850">
+          <label for="unit" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">단위</label>
+          <select id="unit"><option value="1024">KB</option><option value="1048576">MB</option></select>
+        </div>
+        <p class="msg err" id="size-err" role="alert" hidden></p>
+      </fieldset>
+    </div>
+
+    <aside class="result" aria-live="polite" aria-labelledby="r-label">
+      <p class="label" id="r-label">추천 포맷</p>
+      <p class="pick" id="pick">AVIF</p>
+      <p class="headline" id="headline"></p>
+      <p class="range" id="range"></p>
+      <div class="bars" id="bars"></div>
+      <div class="est" id="est" hidden></div>
+      <div class="near" id="near" hidden></div>
+      <ul class="notes" id="notes"></ul>
+    </aside>
+  </div>
+
+  <section class="basis" aria-labelledby="basis-h">
+    <div class="cols">
+      <div>
+        <h2 id="basis-h">이 숫자는 어디서 왔나요</h2>
+        <p>사진 24장과 보안 실습 화면 캡처 24장을 가운데 640×400으로 자르고, SSIM 0.90·0.95·0.98을 넘는 가장 낮은 품질로 JPEG·WebP·AVIF를 만들어 크기를 비교했습니다(총 432건). 아래 표는 조건마다 이미지 24장의 절감률 중앙값입니다.</p>
+        <table id="table" aria-label="조건별 JPEG 대비 절감률 중앙값"></table>
+      </div>
+      <div>
+        <h2>이 결과의 한계</h2>
+        <ul>
+          <li>종류마다 이미지가 24장뿐입니다.</li>
+          <li>화면 캡처는 보안 실습의 터미널·콘솔 화면 위주라 문서나 일반 웹 화면에 그대로 맞지 않을 수 있습니다.</li>
+          <li>SSIM을 밝기 채널로만 재었고, 사람이 눈으로 본 화질 평가는 하지 않았습니다.</li>
+          <li>JPEG는 기본 인코더 기준입니다. mozjpeg를 쓰면 WebP의 이점이 줄 수 있습니다.</li>
+          <li>품질 1에서도 목표 화질을 넘은 32건(모두 화면 캡처)은 실제 절감률을 정확히 재지 못했습니다.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <p>만든 사람: 임동호 · <a href="https://imdongho.github.io/about-me/">포트폴리오</a> · 논문 원자료로 계산한 값만 씁니다.</p>
+</div></footer>
+
+<script src="paper-results.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿file,group,width,height,dominant_share,edge_density,status,reason
+ctf_01_nmap.png,CTF,1064,943,0.367,0.1056,선택,
+ctf_02_hosts_gobuster.png,CTF,1058,941,0.387,0.0633,선택,
+ctf_03_robots.png,CTF,1060,941,1.0,0.0,제외,R2 거의 빈 화면
+ctf_04_testingnotes.png,CTF,1061,944,0.923,0.0258,선택,
+ctf_05_testdata.png,CTF,1056,941,1.0,0.0,제외,R2 거의 빈 화면
+ctf_06_mainpage.png,CTF,1060,942,0.677,0.0187,제외,R3 사진 위주
+ctf_07_cyberchef.png,CTF,1066,943,0.436,0.0967,선택,
+ctf_08_admin_cli.png,CTF,1066,942,0.983,0.0081,제외,R2 거의 빈 화면
+ctf_09_reverseshell.png,CTF,1067,944,0.423,0.1068,선택,
+ctf_10_suid_userflag.png,CTF,1067,940,0.547,0.0753,선택,
+ctf_11_resetroot.png,CTF,1067,940,0.526,0.0788,선택,
+ctf_12_rootflag.png,CTF,1067,938,0.614,0.0606,선택,
+gns3_01_topology.png,GNS3,1624,879,0.874,0.0653,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+gns3_02_r1_routing.png,GNS3,757,402,0.84,0.0716,선택,
+gns3_03_asav_status1.png,GNS3,722,495,0.875,0.0775,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+gns3_04_asav_status2.png,GNS3,722,495,0.86,0.0869,선택,
+gns3_05_asav_acl.png,GNS3,754,495,0.858,0.0894,선택,
+gns3_06_test_kali.png,GNS3,661,418,0.869,0.0597,선택,
+gns3_07_test_attackerC.png,GNS3,661,418,0.876,0.0525,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+gns3_08_test_dns.png,GNS3,661,418,0.866,0.0613,선택,
+gns3_09_test_malware.png,GNS3,661,418,0.877,0.0522,선택,
+gns3_10_asav_logging.png,GNS3,754,495,0.847,0.1014,선택,
+gns3_11_vlan.png,GNS3,661,578,0.935,0.0472,선택,
+mon_01_zabbix_hosts.png,보안관제,1920,1032,0.549,0.0169,선택,
+mon_02_zabbix_dashboard.png,보안관제,1920,1032,0.593,0.0329,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+mon_03_pmm_mysql.png,보안관제,1920,1032,0.52,0.0204,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+ossec_01_status.png,보안관제,661,418,0.854,0.0712,선택,
+ossec_02_detection.png,보안관제,661,930,0.868,0.1055,선택,
+siem_01_wazuh_agents.png,보안관제,1920,1032,0.808,0.0271,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+siem_02_wazuh_detection.png,보안관제,1920,1032,0.854,0.0221,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+suricata_01_config_test.png,보안관제,789,466,0.871,0.1075,선택,
+suricata_02_rules.png,보안관제,917,482,0.868,0.1098,선택,
+suricata_03_status.png,보안관제,917,482,0.898,0.0849,선택,
+suricata_04_detection.png,보안관제,917,482,0.869,0.1108,제외,R4 묶음별 8장 무작위 추출에서 빠짐 (시드 2026)
+vpn_01_server_status.png,보안관제,1141,1032,0.666,0.0228,선택,
+vpn_02_connected.png,보안관제,394,230,,,제외,R1 크기 부족 (394x230 < 640x400)
+vpn_03_ipconfig.png,보안관제,571,160,,,제외,R1 크기 부족 (571x160 < 640x400)
+vpn_04_ping.png,보안관제,461,251,,,제외,R1 크기 부족 (461x251 < 640x400)
+web_01_portal.png,보안관제,1152,1032,0.356,0.018,선택,
+web_02_userlookup_normal.png,보안관제,1152,1032,0.998,0.0012,제외,R2 거의 빈 화면
+web_03_sqli.png,보안관제,1152,1032,0.83,0.0058,제외,R2 거의 빈 화면
+web_04_dns.png,보안관제,925,628,0.988,0.0094,제외,R2 거의 빈 화면
