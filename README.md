@@ -4,7 +4,7 @@
 10번 논문 「같은 화질에서 WebP·AVIF는 JPEG보다 얼마나 작은가」(임동호, 2026)에서 실제로 잰
 '같은 화질 기준 JPEG 대비 절감률'로 어떤 포맷이 얼마나 가벼워지는지 알려 주는 앱입니다.
 
-- 공개 주소: https://imdongho.github.io/image-size-guide/
+- 공개 주소: https://imdongho.github.io/image-format-guide/
 - 만든 사람: 임동호 · https://imdongho.github.io/about-me/
 
 ## 사용자가 할 일 세 가지
