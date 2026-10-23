@@ -7,6 +7,7 @@
   var NAME = { jpeg: 'JPEG', webp: 'WebP', avif: 'AVIF' };
   var KIND = { screen: '화면 캡처', photo: '사진' };
   var KIND_OBJ = { screen: '화면 캡처를', photo: '사진을' };
+  var QNAME = { '0.90': '가벼운', '0.95': '보통', '0.98': '선명한' };
   var MAX_FILE = 30 * 1024 * 1024; // 30MB
   var CROP_W = 640, CROP_H = 400;   // 논문과 같은 가운데 영역
   var state = { kind: 'screen', q: '0.95', bytes: null, measured: null };
@@ -39,7 +40,7 @@
     var other = best === 'avif' ? 'webp' : 'avif';
 
     $('pick').textContent = NAME[best];
-    $('headline').textContent = KIND_OBJ[k] + ' SSIM ' + q + ' 화질로 저장하면, 같은 화질의 JPEG보다 ' +
+    $('headline').textContent = KIND_OBJ[k] + ' ' + QNAME[q] + ' 화질(SSIM ' + q + ')로 저장하면, 같은 화질의 JPEG보다 ' +
       NAME[best] + '가 약 ' + pct(c[best].median) + ', ' + NAME[other] + '가 약 ' + pct(c[other].median) + ' 작습니다.';
     $('range').textContent = '논문 ' + KIND[k] + ' ' + c[best].n + '장의 중앙값입니다. 가운데 절반은 ' +
       NAME[best] + ' ' + pct(c[best].p25) + '~' + pct(c[best].p75) + ' 사이였습니다.';
@@ -102,7 +103,7 @@
     if (k === 'photo') {
       notes.appendChild(el('li', null, '사진은 화질을 바꿔도 절감률 차이가 2%p 안팎이었습니다.'));
     } else {
-      notes.appendChild(el('li', null, '화면 캡처는 화질을 높일수록 절감률이 커졌습니다(SSIM 0.90 → 0.98).'));
+      notes.appendChild(el('li', null, '화면 캡처는 화질을 높일수록 절감률이 커졌습니다(가볍게 → 선명하게).'));
     }
   }
 

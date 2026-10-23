@@ -179,11 +179,11 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;font-size:14px;color
 
       <fieldset>
         <legend><span class="num" aria-hidden="true">2</span>원하는 화질을 고르세요</legend>
-        <p class="step-help">논문은 원본과 얼마나 닮았는지를 SSIM(1에 가까울수록 원본과 같음)으로 맞췄습니다.</p>
+        <p class="step-help">고르기 어렵다면 <b>보통</b>을 고르세요. 괄호 안 숫자는 논문에서 쓴 화질 점수(SSIM)로, 1에 가까울수록 원본과 똑같아 보입니다.</p>
         <div class="choices three">
-          <div class="choice"><input type="radio" name="q" id="q90" value="0.90"><label for="q90"><b>가볍게</b><span>SSIM 0.90 · 미리보기, 썸네일</span></label></div>
-          <div class="choice"><input type="radio" name="q" id="q95" value="0.95" checked><label for="q95"><b>보통</b><span>SSIM 0.95 · 블로그, 보고서 본문</span></label></div>
-          <div class="choice"><input type="radio" name="q" id="q98" value="0.98"><label for="q98"><b>선명하게</b><span>SSIM 0.98 · 작은 글자까지 읽혀야 할 때</span></label></div>
+          <div class="choice"><input type="radio" name="q" id="q90" value="0.90"><label for="q90"><b>가볍게</b><span>미리보기, 썸네일 (SSIM 0.90)</span></label></div>
+          <div class="choice"><input type="radio" name="q" id="q95" value="0.95" checked><label for="q95"><b>보통</b><span>블로그, 보고서 본문 (SSIM 0.95)</span></label></div>
+          <div class="choice"><input type="radio" name="q" id="q98" value="0.98"><label for="q98"><b>선명하게</b><span>작은 글자까지 읽혀야 할 때 (SSIM 0.98)</span></label></div>
         </div>
       </fieldset>
 
