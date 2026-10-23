@@ -84,8 +84,8 @@ legend{display:flex;align-items:baseline;gap:10px;font-size:17px;font-weight:700
 .linkbtn:hover{color:var(--accent-strong);text-decoration-color:currentColor}
 .hint{margin:8px 0 0;font-size:13.5px;color:var(--faint)}
 #drop.drag{outline:2px dashed var(--accent);outline-offset:10px;border-radius:10px}
-.analysis{margin-top:16px;display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:start;padding:14px 16px;border-radius:10px;background:var(--surface)}
-.analysis canvas{width:72px;height:45px;border-radius:4px;background:#fff}
+.analysis{margin-top:16px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px;align-items:start;padding:16px;border-radius:10px;background:var(--surface)}
+.analysis canvas{display:block;width:100%;height:auto;aspect-ratio:16/10;border-radius:6px;background:var(--bg)}
 .analysis .verdict{font-size:14.5px;line-height:1.6}
 .analysis .verdict b{color:var(--accent-strong)}
 .analysis .metric{color:var(--faint);font-size:13px;margin-top:4px}
@@ -156,6 +156,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;font-size:14px;color
   .choice input:checked + label{box-shadow:inset 3px 0 0 var(--accent)}
   .result .pick{font-size:42px}
   .size-input input{flex:1 1 8em;width:auto}
+  .analysis{grid-template-columns:minmax(0,1fr);gap:12px}
 }
 </style>
 </head>
@@ -191,7 +192,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;font-size:14px;color
           </div>
           <p class="hint">이미지는 이 브라우저 안에서만 분석하고 어디에도 올리지 않습니다. 이 영역에 끌어다 놓아도 됩니다.</p>
           <div class="analysis" id="analysis" hidden aria-live="polite">
-            <canvas id="thumb" width="144" height="90" aria-hidden="true"></canvas>
+            <canvas id="thumb" width="560" height="350" aria-hidden="true"></canvas>
             <div><div class="verdict" id="verdict"></div><div class="metric" id="metric"></div></div>
           </div>
           <p class="msg err" id="file-err" role="alert" hidden></p>

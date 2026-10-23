@@ -163,10 +163,11 @@
   function showAnalysis(src, label) {
     var r = analyzeCanvas(src), R = P.screenRule;
     state.measured = r;
-    var t = $('thumb').getContext('2d');
-    t.fillStyle = '#fff'; t.fillRect(0, 0, 144, 90);
-    var s = Math.min(144 / r.w, 90 / r.h);
-    t.drawImage(src, (144 - r.w * s) / 2, (90 - r.h * s) / 2, r.w * s, r.h * s);
+    var tc = $('thumb'), TW = tc.width, TH = tc.height, t = tc.getContext('2d');
+    t.clearRect(0, 0, TW, TH);
+    var s = Math.min(TW / r.w, TH / r.h);
+    t.imageSmoothingQuality = 'high';
+    t.drawImage(src, (TW - r.w * s) / 2, (TH - r.h * s) / 2, r.w * s, r.h * s);
 
     var kind, lines = [];
     // 논문의 빈 화면 규칙(R2)은 화면 캡처 후보에 쓴 규칙이므로, 한 색 비율이 화면 캡처 범위일 때만 적용한다
